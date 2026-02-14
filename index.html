@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  margin:0;
+  padding:0;
+  background:linear-gradient(135deg,#ff4d6d,#ff758c,#ffb3c1);
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  color:white;
+  text-align:center;
+}
+
+.container{
+  animation:fadeIn 3s ease-in-out;
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:60px;
+}
+
+h2{
+  font-size:32px;
+  margin-top:-10px;
+}
+
+p{
+  font-size:18px;
+}
+
+button{
+  margin-top:20px;
+  padding:15px 35px;
+  font-size:18px;
+  border:none;
+  border-radius:50px;
+  background:white;
+  color:#ff4d6d;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  background:#ffe6eb;
+}
+
+/* Floating hearts */
+
+.heart{
+  position:absolute;
+  color:red;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* Fade animation */
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* Gift box */
+
+.gift{
+  font-size:50px;
+  margin-top:15px;
+  animation:jump 2s infinite;
+}
+
+@keyframes jump{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+/* Balloons */
+
+.balloon{
+  position:absolute;
+  font-size:30px;
+  animation:balloonFloat 8s linear infinite;
+}
+
+@keyframes balloonFloat{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Maaz ❤️</h1>
+
+<h2>Will you be my Valentine? 💍</h2>
+
+<p>You are my today, my tomorrow, and my forever 💖</p>
+<p>Every love story is beautiful… but ours is my favorite 🌹</p>
+<p>I found my home in your heart 🏡❤️</p>
+
+<div class="gift">🎁</div>
+
+<button onclick="showLove()">YES 💘</button>
+
+</div>
+
+<script>
+function showLove(){
+  alert("Yayyyy!!! You just made Maaz the happiest person alive ❤️🥹");
+}
+
+/* Create floating hearts */
+
+for(let i=0;i<25;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+3)+"s";
+  document.body.appendChild(heart);
+}
+
+/* Create balloons */
+
+for(let i=0;i<10;i++){
+  let balloon=document.createElement("div");
+  balloon.className="balloon";
+  balloon.innerHTML="🎈";
+  balloon.style.left=Math.random()*100+"vw";
+  balloon.style.animationDuration=(Math.random()*5+5)+"s";
+  document.body.appendChild(balloon);
+}
+</script>
+
+</body>
+</html>

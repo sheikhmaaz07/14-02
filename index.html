@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- ✅ MOST IMPORTANT FOR MOBILE -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For My Valentine ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
@@ -10,60 +14,57 @@
 
 body{
   margin:0;
-  padding:0;
+  padding:20px;
   background:linear-gradient(135deg,#ff4d6d,#ff758c,#ffb3c1);
-  height:100vh;
-  overflow:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  min-height:100vh;
   font-family:'Poppins',sans-serif;
   color:white;
   text-align:center;
+  overflow-x:hidden;
 }
 
+/* Center content nicely */
 .container{
-  animation:fadeIn 3s ease-in-out;
+  max-width:600px;
+  margin:auto;
+  animation:fadeIn 2s ease-in-out;
 }
 
 h1{
   font-family:'Pacifico',cursive;
-  font-size:60px;
+  font-size:clamp(32px,6vw,60px);
 }
 
 h2{
-  font-size:32px;
-  margin-top:-10px;
+  font-size:clamp(22px,5vw,32px);
 }
 
 p{
-  font-size:18px;
+  font-size:clamp(16px,4vw,18px);
 }
 
 button{
   margin-top:20px;
-  padding:15px 35px;
-  font-size:18px;
+  padding:14px 30px;
+  font-size:16px;
   border:none;
   border-radius:50px;
   background:white;
   color:#ff4d6d;
   cursor:pointer;
-  transition:0.3s;
 }
 
-button:hover{
-  transform:scale(1.1);
-  background:#ffe6eb;
+button:active{
+  transform:scale(0.95);
 }
 
 /* Floating hearts */
-
 .heart{
-  position:absolute;
+  position:fixed;
   color:red;
-  font-size:20px;
+  font-size:18px;
   animation:float 6s linear infinite;
+  opacity:0.7;
 }
 
 @keyframes float{
@@ -71,37 +72,34 @@ button:hover{
   100%{transform:translateY(-10vh);}
 }
 
-/* Fade animation */
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(30px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* Gift box */
-
+/* Gift */
 .gift{
-  font-size:50px;
+  font-size:40px;
   margin-top:15px;
   animation:jump 2s infinite;
 }
 
 @keyframes jump{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
+  50%{transform:translateY(-12px);}
 }
 
 /* Balloons */
-
 .balloon{
-  position:absolute;
-  font-size:30px;
-  animation:balloonFloat 8s linear infinite;
+  position:fixed;
+  font-size:24px;
+  animation:balloonFloat 9s linear infinite;
+  opacity:0.8;
 }
 
 @keyframes balloonFloat{
   0%{transform:translateY(100vh);}
   100%{transform:translateY(-10vh);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -126,13 +124,15 @@ button:hover{
 </div>
 
 <script>
+
 function showLove(){
   alert("Yayyyy!!! You just made Maaz the happiest person alive ❤️🥹");
 }
 
-/* Create floating hearts */
+/* Hearts (less on mobile for performance) */
+let heartCount = window.innerWidth < 500 ? 12 : 25;
 
-for(let i=0;i<25;i++){
+for(let i=0;i<heartCount;i++){
   let heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="❤";
@@ -141,9 +141,10 @@ for(let i=0;i<25;i++){
   document.body.appendChild(heart);
 }
 
-/* Create balloons */
+/* Balloons */
+let balloonCount = window.innerWidth < 500 ? 6 : 10;
 
-for(let i=0;i<10;i++){
+for(let i=0;i<balloonCount;i++){
   let balloon=document.createElement("div");
   balloon.className="balloon";
   balloon.innerHTML="🎈";
@@ -151,6 +152,7 @@ for(let i=0;i<10;i++){
   balloon.style.animationDuration=(Math.random()*5+5)+"s";
   document.body.appendChild(balloon);
 }
+
 </script>
 
 </body>

@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-
-<!-- ✅ MOST IMPORTANT FOR MOBILE -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For My Valentine ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
@@ -20,86 +17,56 @@ body{
   font-family:'Poppins',sans-serif;
   color:white;
   text-align:center;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
-/* Center content nicely */
 .container{
   max-width:600px;
   margin:auto;
-  animation:fadeIn 2s ease-in-out;
+  z-index:2;
+  position:relative;
 }
 
-h1{
-  font-family:'Pacifico',cursive;
-  font-size:clamp(32px,6vw,60px);
-}
-
-h2{
-  font-size:clamp(22px,5vw,32px);
-}
-
-p{
-  font-size:clamp(16px,4vw,18px);
-}
+h1{font-family:'Pacifico'; font-size:clamp(32px,6vw,60px);}
+h2{font-size:clamp(22px,5vw,32px);}
+p{font-size:clamp(16px,4vw,18px);}
 
 button{
-  margin-top:20px;
+  margin-top:15px;
   padding:14px 30px;
   font-size:16px;
   border:none;
   border-radius:50px;
   background:white;
   color:#ff4d6d;
-  cursor:pointer;
 }
 
-button:active{
-  transform:scale(0.95);
+/* Countdown box */
+
+#countdown{
+  font-size:22px;
+  margin-top:10px;
+  font-weight:bold;
+  animation:pulse 1s infinite;
 }
 
-/* Floating hearts */
-.heart{
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+
+/* floating items */
+
+.floating{
   position:fixed;
-  color:red;
-  font-size:18px;
-  animation:float 6s linear infinite;
-  opacity:0.7;
+  top:-10vh;
+  animation:fall linear infinite;
+  z-index:1;
 }
 
-@keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
-}
-
-/* Gift */
-.gift{
-  font-size:40px;
-  margin-top:15px;
-  animation:jump 2s infinite;
-}
-
-@keyframes jump{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
-}
-
-/* Balloons */
-.balloon{
-  position:fixed;
-  font-size:24px;
-  animation:balloonFloat 9s linear infinite;
-  opacity:0.8;
-}
-
-@keyframes balloonFloat{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+@keyframes fall{
+  to{transform:translateY(110vh);}
 }
 
 </style>
@@ -110,14 +77,13 @@ button:active{
 <div class="container">
 
 <h1>Hello From Maaz ❤️</h1>
-
 <h2>Will you be my Valentine? 💍</h2>
 
 <p>Valentine’s is not just about love — it’s about appreciation 💖</p>
-<p>And you are truly special in your own beautiful way 🌹</p>
-<p>Today is about celebrating amazing souls like you 🌸</p>
+<p>You are truly special in your own beautiful way 🌹</p>
+<p>Don’t think too long… time is running 😍</p>
 
-<div class="gift">🎁</div>
+<div id="countdown">⏳ 60</div>
 
 <button onclick="showLove()">YES 💘</button>
 
@@ -129,29 +95,41 @@ function showLove(){
   alert("Yayyyy!!! You just made Maaz the happiest person alive ❤️🥹");
 }
 
-/* Hearts (less on mobile for performance) */
-let heartCount = window.innerWidth < 500 ? 12 : 25;
+/* 🎈 Generate LOTS of floating items */
 
-for(let i=0;i<heartCount;i++){
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*3+3)+"s";
-  document.body.appendChild(heart);
+let symbols = ["💖","❤️","💘","🎈","🎁"];
+
+let total = window.innerWidth < 500 ? 40 : 80;
+
+for(let i=0;i<total;i++){
+
+  let el = document.createElement("div");
+  el.className = "floating";
+  el.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+
+  el.style.left = Math.random()*100+"vw";
+  el.style.fontSize = (Math.random()*20+16)+"px";
+  el.style.animationDuration = (Math.random()*5+5)+"s";
+  el.style.opacity = Math.random();
+
+  document.body.appendChild(el);
 }
 
-/* Balloons */
-let balloonCount = window.innerWidth < 500 ? 6 : 10;
+/* ⏱ Countdown */
 
-for(let i=0;i<balloonCount;i++){
-  let balloon=document.createElement("div");
-  balloon.className="balloon";
-  balloon.innerHTML="🎈";
-  balloon.style.left=Math.random()*100+"vw";
-  balloon.style.animationDuration=(Math.random()*5+5)+"s";
-  document.body.appendChild(balloon);
-}
+let time = 60;
+let countdown = document.getElementById("countdown");
+
+let timer = setInterval(()=>{
+  time--;
+  countdown.innerHTML = "⏳ " + time + " seconds left";
+
+  if(time <= 0){
+    clearInterval(timer);
+    countdown.innerHTML = "💖 Time’s up… but you’re still my Valentine 😍";
+  }
+
+},1000);
 
 </script>
 
